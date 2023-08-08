@@ -26,3 +26,7 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+
+// Governor address => 0xb192770fc5485D7A73411c74DaF4B00711E3D20C
+// Token address => 0x68BaEA9c2cB456BF41C988b86528CE78f488d8C7
