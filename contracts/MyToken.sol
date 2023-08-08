@@ -6,15 +6,19 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 contract MyToken is ERC20, ERC20Permit, ERC20Votes {
-    address governor;
+    address public governor;
+
+    modifier onlyGovernor {
+        require(governor == msg.sender);
+        _;
+    }
 
     constructor(address _governor) ERC20("MyToken", "MTK") ERC20Permit("MyToken") {
         governor = _governor;
         _mint(msg.sender, 10000e18);
     }
 
-    function mint(address to, uint256 amount) external {
-        require(governor == msg.sender);
+    function mint(address to, uint256 amount) external onlyGovernor {
         _mint(to, amount);
     }
 
